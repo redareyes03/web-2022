@@ -30,7 +30,7 @@ function NavBar() {
                 </Link>
             </div>
 
-            <Button as='a' href='/' color={'secondary'} size="sm" icon={<BsCaretLeftFill />}>Landing Page</Button>
+            <Button as='a' href='/' color={'secondary'} shadow  size="sm" icon={<BsCaretLeftFill />}>Landing Page</Button>
         </div>
     )
 }

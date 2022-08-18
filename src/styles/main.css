@@ -52,6 +52,16 @@
   height: 5rem
 }
 
+.w-fit {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content
+}
+
+.w-screen {
+  width: 100vw
+}
+
 .w-1\/6 {
   width: 16.666667%
 }
@@ -62,6 +72,14 @@
 
 .w-4\/6 {
   width: 66.666667%
+}
+
+.w-full {
+  width: 100%
+}
+
+.w-10 {
+  width: 2.5rem
 }
 
 .flex-col {
@@ -136,12 +154,24 @@
   background-color: rgb(251 191 36 / var(--tw-bg-opacity))
 }
 
+.bg-gray-200\/50 {
+  background-color: rgb(229 231 235 / 0.5)
+}
+
+.bg-gray-400\/50 {
+  background-color: rgb(156 163 175 / 0.5)
+}
+
 .fill-gray-500\/80 {
   fill: rgb(107 114 128 / 0.8)
 }
 
 .p-3 {
   padding: 0.75rem
+}
+
+.p-4 {
+  padding: 1rem
 }
 
 .py-4 {
@@ -212,6 +242,12 @@
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+
+.shadow {
+  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 

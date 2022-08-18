@@ -1,4 +1,4 @@
-import { Text } from "@nextui-org/react"
+import { Button, Text, Tooltip } from "@nextui-org/react"
 
 function Inbox() {
 
@@ -12,16 +12,25 @@ function Inbox() {
         <div>
             <Text size={24} weight="semibold">Inbox</Text>
             {messages.map((message, key) => (
-                <div key={key} className="shadow-md rounded-lg p-3 my-4">
-                    <div className="flex justify-between ">
-                        <Text weight={"medium"} size={18}>{message.nombre} - {message.correo}</Text>
-                        <Text weight={"thin"}>{message.folio}</Text>
+                <Tooltip key={key} className="w-full" placement="right" content={<TooltipContent message={message}/>}>
+                    <div className="shadow-md rounded-lg p-3 my-4" >
+                        <div className="flex justify-between ">
+                            <Text weight={"medium"} size={18}>{message.nombre} - {message.correo}</Text>
+                            <Text weight={"thin"}>{message.folio}</Text>
+                        </div>
+                        <Text className="mt-4" >{message.mensaje}</Text>
                     </div>
-                    <Text className="mt-4" >{message.mensaje}</Text>
-                </div>
+                </Tooltip>
             ))}
         </div>
     )
 }
+
+const TooltipContent = ({message}) => (
+    <div  className="flex gap-3 p-4">
+        <Button shadow size={"xs"} color={"primary"} onClick={() => { navigator.clipboard.writeText(message.correo) }}>Copy</Button>
+        <Button shadow size={"xs"} color={"error"}>Delete</Button>
+    </div>
+)
 
 export default Inbox

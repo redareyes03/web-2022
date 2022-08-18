@@ -60,7 +60,7 @@ export default function Home() {
                     <Table.Cell css={{ maxWidth: 200 }}>{items.descripcion.map((desc, ix) => <li key={ix}>{desc}</li>)}</Table.Cell>
                     <Table.Cell>${items.precio} MXN</Table.Cell>
                     <Table.Cell>
-                      <Button size={"xs"} onPress={() => { setVisibleModalForm(true), setPlan(items.plan) }} color="primary">Solicitar</Button>
+                      <Button shadow size={"xs"} onPress={() => { setVisibleModalForm(true), setPlan(items.plan) }} color="primary">Solicitar</Button>
                     </Table.Cell>
                   </Table.Row>
                 )}

@@ -6,7 +6,7 @@ function Form() {
         <Input aria-labelledby='Nombre' label='Nombre' clearable type={"text"} name='nombre' placeholder='Ingresa tu nombre(s)'/>
         <Input aria-labelledby='Correo' label='Correo' clearable type={"email"} name='correo' placeholder='Ingresa tu @ correo'/>
         <Textarea aria-labelledby='Mensaje' label='Mensaje' name='mensaje' placeholder='Ingresa tu mensaje o pregunta'/>
-        <Button as='button' type='submit'>Enviar</Button>
+        <Button shadow as='button' type='submit'>Enviar</Button>
     </form>
   )
 }
