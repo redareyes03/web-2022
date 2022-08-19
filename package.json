@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "twd": "tailwindcss -i ./src/styles/tailwind.css -o ./src/styles/main.css --watch"
+    "twd": "tailwindcss -i ./src/styles/tailwind.css -o ./src/styles/main.css --watch",
+    "srv": "nodemon backend/app.js"
   },
   "dependencies": {
     "@nextui-org/react": "^1.0.0-beta.9",
