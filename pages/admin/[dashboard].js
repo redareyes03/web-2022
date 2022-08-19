@@ -27,7 +27,6 @@ export function getStaticPaths() {
 }
 
 export function getStaticProps(ctx) {
-  console.log(ctx)
   const page = ctx.params.dashboard === 'inbox' ? 'inbox' : 'requests'
 
   return {

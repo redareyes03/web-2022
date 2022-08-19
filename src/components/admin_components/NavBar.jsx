@@ -2,6 +2,7 @@ import { Avatar, Button, Text } from '@nextui-org/react'
 import Link from 'next/link'
 import { FaPaperPlane, FaInbox } from 'react-icons/fa'
 import { BsCaretLeftFill } from 'react-icons/bs'
+import { CgLogOut } from 'react-icons/cg'
 
 function NavBar() {
     return (
@@ -30,7 +31,10 @@ function NavBar() {
                 </Link>
             </div>
 
-            <Button as='a' href='/' color={'secondary'} shadow  size="sm" icon={<BsCaretLeftFill />}>Landing Page</Button>
+            <div>
+                <Button as='a' href='/' className="w-full mb-4" color={'secondary'} shadow size="sm" icon={<BsCaretLeftFill />}>Landing Page</Button>
+                <Button className="w-full" color={'error'} shadow size="sm" icon={<CgLogOut />}>Logout</Button>
+            </div>
         </div>
     )
 }
