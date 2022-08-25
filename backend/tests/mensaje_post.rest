@@ -4,5 +4,6 @@ Content-Type: application/json
 {
     "nombre": "Ruben",
     "correo": "ruben@ruben.com",
-    "mensaje": "mensaje"
+    "mensaje": "mensaje",
+    "date": "08/22/2022"
 }

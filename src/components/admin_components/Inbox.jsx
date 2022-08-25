@@ -1,18 +1,25 @@
 import { Button, Text, Tooltip } from "@nextui-org/react"
+import axios from "axios"
+import { useEffect, useState } from "react"
+import { getMsg } from "../../services/getMsg"
 
-function Inbox() {
+function Inbox({ messages }) {
 
-    const messages = [
-        { folio: 123, nombre: "Ruben", correo: "ruben@correo.com", mensaje: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet nisl in nisi cursus ullamcorper. Phasellus vitae sagittis nunc. Quisque pulvinar ipsum mi, non auctor sapien congue sit amet. Sed sed augue rutrum, varius sapien at, dignissim velit. Suspendisse sed erat ipsum. Mauris odio risus, faucibus lacinia semper eget, pharetra sit amet urna. Aliquam erat volutpat. Etiam posuere rutrum aliquam." },
-        { folio: 123, nombre: "Ruben", correo: "ruben@correo.com", mensaje: "Hola este es mi mensaje" }
-    ]
+    const [list, setList] = useState(messages)
+    const [btnDelete, pressBtnDelete] = useState(false);
 
+    useEffect(() => {
+        (async function () {
+            const data = await getMsg();
+            setList(data)
+        })()
+    }, [btnDelete])
 
     return (
         <div>
             <Text size={24} weight="semibold">Inbox</Text>
-            {messages.map((message, key) => (
-                <Tooltip key={key} className="w-full" placement="right" content={<TooltipContent message={message}/>}>
+            {list.map((message, key) => (
+                <Tooltip key={key} className="w-full" placement="right" content={<TooltipContent message={message} pressBtnDelete={pressBtnDelete} btnState={btnDelete} />}>
                     <div className="shadow-md rounded-lg p-3 my-4" >
                         <div className="flex justify-between ">
                             <Text weight={"medium"} size={18}>{message.nombre} - {message.correo}</Text>
@@ -26,10 +33,17 @@ function Inbox() {
     )
 }
 
-const TooltipContent = ({message}) => (
-    <div  className="flex gap-3 p-4">
+const TooltipContent = ({ message, pressBtnDelete, btnState }) => (
+    <div className="flex gap-3 p-4">
         <Button shadow size={"xs"} color={"primary"} onClick={() => { navigator.clipboard.writeText(message.correo) }}>Copy</Button>
-        <Button shadow size={"xs"} color={"error"}>Delete</Button>
+        <Button shadow size={"xs"} color={"error"} onClick={async () => {
+            try {
+                pressBtnDelete(!btnState)
+                await axios.delete(`http://localhost:3001/inbox/${message._id}`)
+            } catch (error) {
+                return error
+            }
+        }}>Delete</Button>
     </div>
 )
 

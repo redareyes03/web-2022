@@ -6,7 +6,7 @@ import { CgLogOut } from 'react-icons/cg'
 
 function NavBar() {
     return (
-        <div className='bg-gray-100/50 blur w-1/6 h-screen px-6 py-8 flex flex-col justify-between'>
+        <div className='fixed bg-gray-100/50 blur w-fit h-screen px-6 py-8 flex flex-col justify-between'>
             <div>
                 <div className='flex gap-3 mb-8'>
                     <Avatar src='https://res.cloudinary.com/dkvy71id6/image/upload/v1659936241/profile_xtd1t8.jpg' />
@@ -32,7 +32,7 @@ function NavBar() {
             </div>
 
             <div>
-                <Button as='a' href='/' className="w-full mb-4" color={'secondary'} shadow size="sm" icon={<BsCaretLeftFill />}>Landing Page</Button>
+                <Button as='a' href='/' className=" mb-4" color={'secondary'} shadow size="sm" icon={<BsCaretLeftFill />}>Landing Page</Button>
                 <Button className="w-full" color={'error'} shadow size="sm" icon={<CgLogOut />}>Logout</Button>
             </div>
         </div>

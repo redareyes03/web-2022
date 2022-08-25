@@ -5,7 +5,7 @@ const Mensaje = new Schema({
     nombre: String,
     correo: String,
     mensaje: String,
-    // date: Date
+    date: Date
 }, {
     collection: "Mensajes"
 })
