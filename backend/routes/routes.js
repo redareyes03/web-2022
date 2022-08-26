@@ -1,3 +1,4 @@
 module.exports = {
-    mensajes: require('./mensajes')
+    mensajes: require('./mensajes'),
+    requests: require('./requests')
 }

@@ -1,32 +1,35 @@
 import _ from 'lodash'
 import Link from 'next/link'
 import React from 'react'
-
+import { Navbar, Text, Button } from '@nextui-org/react'
 
 
 function Menu() {
 
-    const links = ['inicio', 'contacto']
+    const items = [
+        { tag: "Inicio", href: '/' },
+        { tag: "Contacto", href: '/contacto' },
+    ]
 
     return (
-        <div className='flex flex-col md:flex-row  justify-between items-center py-3 px-8 shadow-md'>
-            <Link passHref href={"/"} >
-                <a className='text-gray-600' ><h1 className='m-0 text-3xl'>@RubenReyes</h1></a>
-            </Link>
-            <nav className='flex gap-8'>
-                {links.map((element, index) => (
-                    <Link
-                        key={index}
-                        href={`/${element === 'inicio' ? '/' : element}`}
-                        passHref
-                    >
-                        <a
-                            className='text-gray-600 text-lg '
-                        >{_.capitalize(element)}</a>
-                    </Link>
+        <Navbar isCompact shouldHideOnScroll >
+            <Navbar.Brand>
+                <Navbar.Toggle showIn="sm" />
+                <Text hideIn="sm">ACME</Text>
+            </Navbar.Brand>
+            <Navbar.Content hideIn="sm" variant="underline" enableCursorHighlight>
+                {items.map(({ href, tag }, key) => (<Navbar.Link key={key} href={href}>{tag}</Navbar.Link>))}
+            </Navbar.Content>
+            <Navbar.Collapse>
+                {items.map(({ href, tag }, key) => (
+                    <Navbar.CollapseItem>
+                        <Link key={key} href={href}>{tag}</Link>
+                    </Navbar.CollapseItem>
+
                 ))}
-            </nav>
-        </div>
+
+            </Navbar.Collapse>
+        </Navbar>
     )
 }
 

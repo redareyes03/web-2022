@@ -1,9 +1,9 @@
 const router = require('express').Router()
-const MensajeModel = require('../models/Mensaje');
+const RequestModel = require('../models/Request');
 
 router.get("/", async (req, res) => {
     try {
-        const results = await MensajeModel.find();
+        const results = await RequestModel.find();
         res.status(200).json(results)
     } catch (error) {
         res.status(403).send('Error')
@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
     const content = req.body
     try {
-        const result = await MensajeModel.create({ ...content });
+        const result = await RequestModel.create({ ...content });
         res.status(200).send('Ok')
     } catch (error) {
         res.status(403).send('Error')
@@ -21,14 +21,5 @@ router.post("/", async (req, res) => {
 
 })
 
-router.delete("/:id", async (req, res) => {
-    const { id } = req.params
-    try {
-        await MensajeModel.findByIdAndDelete(id);
-        res.status(200)
-    } catch (error) {
-        res.status(403).send('Can\'t delete');
-    }
 
-})
 module.exports = router
