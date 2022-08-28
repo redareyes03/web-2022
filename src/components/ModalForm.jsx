@@ -1,5 +1,8 @@
 import { Button, Checkbox, Grid, Input, Modal, Radio, Text } from '@nextui-org/react'
+import axios from 'axios'
 import { useState } from 'react'
+import validate, { validateBool } from '../services/valForm'
+
 function ModalForm({ modalState, openHandler, titulo }) {
     const [datos, setDatos] = useState({
         plan: titulo,
@@ -9,6 +12,7 @@ function ModalForm({ modalState, openHandler, titulo }) {
         contactar: '',
         date: Date.now()
     })
+    const [status, setStatus] = useState(false)
     return (
         <Modal preventClose open={modalState} closeButton onClose={() => openHandler(false)}>
             <Modal.Header>
@@ -21,7 +25,7 @@ function ModalForm({ modalState, openHandler, titulo }) {
                 <Input
                     onInput={({ target }) => setDatos({ ...datos, nombre: target.value })} aria-label="Nombre"
                     required label='Nombre' clearable type={"text"} placeholder='Ingresa tu nombre(s)' />
-                {/* <Input
+                <Input
                     onInput={({ target }) => setDatos({ ...datos, correo: target.value })}
                     aria-labelledby="Correo"
                     required label='Correo' clearable type={"email"} name='correo' placeholder='Ingresa tu @ correo' />
@@ -32,14 +36,17 @@ function ModalForm({ modalState, openHandler, titulo }) {
                 <Radio.Group aria-labelledby="Contacto" onChange={(e) => setDatos({ ...datos, contactar: e })} size='xs' orientation='horizontal' label="Por dónde prefieres ser contactado">
                     <Radio value='correo' description="email proporcionado">Correo</Radio>
                     <Radio value='telefono' description="vía whatsap del tel proporcionado">Whatsap</Radio>
-                </Radio.Group> */}
+                </Radio.Group>
             </Modal.Body>
             <Modal.Footer justify='center'>
                 <Button color={'gradient'} onPress={async () => {
-                    // const request = await axios.post('http://localhost:3001/requests', datos)
-                    console.log(datos)
+                    const { nombre, contactar, correo, telefono } = datos
+                    if (validateBool(nombre) && validateBool(contactar) && validateBool(correo) && validateBool(telefono)) {
+                        const request = await axios.post('http://localhost:3001/requests', datos)
+                        setStatus(true)
+                    }
                 }
-                }>Enviar</Button>
+                }>{status ? 'Listo' : 'Enviar'}</Button>
             </Modal.Footer>
         </Modal >
     )

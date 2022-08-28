@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import Link from 'next/link'
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Navbar, Text, Button } from '@nextui-org/react'
 
 
@@ -11,19 +11,31 @@ function Menu() {
         { tag: "Contacto", href: '/contacto' },
     ]
 
+    const [activePage, setActivePage] = useState()
+
+    useEffect(() => {
+        setActivePage(getActivePage());
+    }, [])
+
+
     return (
-        <Navbar isCompact shouldHideOnScroll >
+        <Navbar isCompact variant={"sticky"} css={{zIndex: '$max'}}>
             <Navbar.Brand>
-                <Navbar.Toggle showIn="sm" />
-                <Text hideIn="sm">ACME</Text>
+                <Navbar.Toggle showIn="xs" />
+                <Text hideIn="xs">ACME</Text>
             </Navbar.Brand>
-            <Navbar.Content hideIn="sm" variant="underline" enableCursorHighlight>
-                {items.map(({ href, tag }, key) => (<Navbar.Link key={key} href={href}>{tag}</Navbar.Link>))}
+            <Navbar.Content hideIn="sm" variant="underline" >
+                {items.map(({ href, tag }, key) => (
+                    <Navbar.Link key={key} href={href} isActive={activePage === href ? true : false}>
+                        {tag}
+                    </Navbar.Link>
+
+                ))}
             </Navbar.Content>
             <Navbar.Collapse>
                 {items.map(({ href, tag }, key) => (
-                    <Navbar.CollapseItem>
-                        <Link key={key} href={href}>{tag}</Link>
+                    <Navbar.CollapseItem key={key}>
+                        <Link href={href}>{tag}</Link>
                     </Navbar.CollapseItem>
 
                 ))}
@@ -31,6 +43,10 @@ function Menu() {
             </Navbar.Collapse>
         </Navbar>
     )
+}
+
+function getActivePage(){
+    return window.location.pathname
 }
 
 export default Menu

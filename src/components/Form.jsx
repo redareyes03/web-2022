@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useState } from 'react'
 import { AiFillCheckCircle } from 'react-icons/ai'
 import { MdError } from 'react-icons/md'
+import validate from '../services/valForm'
 
 
 function Form() {
@@ -15,19 +16,19 @@ function Form() {
     <form className='bg-gray-50 my-6 rounded w-fit py-4 px-8 flex flex-col gap-8 shadow-lg '>
 
       <Input
-        status={setStatus(nameVal)} onClearClick={() => setNameVal('')}
+        status={validate(nameVal)} onClearClick={() => setNameVal('')}
         onInput={({ target }) => setNameVal(target.value)}
         aria-labelledby='Nombre' label='Nombre' clearable type={"text"} name='nombre' placeholder='Ingresa tu nombre(s)' />
 
       <Input
-        status={setStatus(mailVal, [validateMail(mailVal)])} onClearClick={() => setMailVal('')}
+        status={validate(mailVal, [validateMail(mailVal)])} onClearClick={() => setMailVal('')}
         onInput={({ target }) => {
           setMailVal(target.value)
         }}
         aria-labelledby='Correo' label='Correo' clearable type={"email"} name='correo' placeholder='Ingresa tu @ correo' />
 
       <Textarea
-        status={setStatus(msgVal)} onClearClick={() => setMsgVal('')}
+        status={validate(msgVal)} onClearClick={() => setMsgVal('')}
         onInput={({ target }) => setMsgVal(target.value)}
         aria-labelledby='Mensaje' label='Mensaje' name='mensaje' placeholder='Ingresa tu mensaje o pregunta' />
       <Popover isOpen={isOpen} onOpenChange={() => setIsOpen(false)}>
@@ -62,10 +63,7 @@ function Form() {
 }
 
 
-function setStatus(val, params = []) {
-  if (val == ' ') return 'default';
-  return (val != '' && params.every((val) => val === true)) ? 'success' : 'error';
-}
+
 
 function validateMail(mail) {
   const regex = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'g');
