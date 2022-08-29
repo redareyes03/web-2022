@@ -10,6 +10,7 @@ export default function Home() {
 
   const [modalForm, setVisibleModalForm] = useState(false)
   const [selectedPlan, setPlan] = useState('')
+  const [selectedPlanId, setPlanId] = useState('')
 
   const planes = [
     {
@@ -60,7 +61,11 @@ export default function Home() {
                     <Table.Cell css={{ maxWidth: 200 }}>{items.descripcion.map((desc, ix) => <li key={ix}>{desc}</li>)}</Table.Cell>
                     <Table.Cell>${items.precio} MXN</Table.Cell>
                     <Table.Cell>
-                      <Button shadow size={"xs"} onPress={() => { setVisibleModalForm(true), setPlan(items.plan) }} color="primary">Solicitar</Button>
+                      <Button shadow size={"xs"} onPress={() => {
+                        setVisibleModalForm(true);
+                        setPlan(items.plan)
+                        setPlanId(items.key)
+                      }} color="primary">Solicitar</Button>
                     </Table.Cell>
                   </Table.Row>
                 )}
@@ -76,7 +81,7 @@ export default function Home() {
           <Form />
         </div>
 
-        <ModalForm modalState={modalForm} titulo={selectedPlan} openHandler={setVisibleModalForm} />
+        <ModalForm modalState={modalForm} titulo={selectedPlan} planId={selectedPlanId} openHandler={setVisibleModalForm} />
 
       </Container>
     </>

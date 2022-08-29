@@ -6,6 +6,11 @@
   position: fixed
 }
 
+.sticky {
+  position: -webkit-sticky;
+  position: sticky
+}
+
 .my-6 {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem

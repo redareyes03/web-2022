@@ -24,7 +24,7 @@ function Menu() {
                 <Navbar.Toggle showIn="xs" />
                 <Text hideIn="xs">ACME</Text>
             </Navbar.Brand>
-            <Navbar.Content hideIn="sm" variant="underline" >
+            <Navbar.Content hideIn="sm" variant="underline" enableCursorHighlight>
                 {items.map(({ href, tag }, key) => (
                     <Navbar.Link key={key} href={href} isActive={activePage === href ? true : false}>
                         {tag}

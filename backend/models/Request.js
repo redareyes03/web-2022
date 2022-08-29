@@ -3,6 +3,7 @@ const { Schema } = mongoose;
 
 const Request = new Schema({
     plan: String,
+    planId: Number,
     nombre: String,
     correo: String,
     telefono: String,

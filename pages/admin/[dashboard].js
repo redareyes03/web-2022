@@ -4,15 +4,16 @@ import Inbox from '../../src/components/admin_components/Inbox'
 import NavBar from '../../src/components/admin_components/NavBar'
 import Requests from '../../src/components/admin_components/Requests'
 import { getMsg } from '../../src/services/getMsg'
+import { getRqst } from '../../src/services/getRqst'
 
-function Home({ page, messages }) {
+function Home({ page, messages, requests }) {
   return (
     <>
       <NavBar />
       <div className='flex justify-between'>
         <div className="w-1/6 px-6" />
         <div className='px-sm py-8 w-4/6 '>
-          {page === 'inbox' ? <Inbox messages={messages} /> : <Requests />}
+          {page === 'inbox' ? <Inbox messages={messages} /> : <Requests requests={requests} />}
         </div>
         <div className='w-1/6'></div>
       </div>
@@ -34,12 +35,15 @@ export function getStaticPaths() {
 export async function getStaticProps(ctx) {
   const page = ctx.params.dashboard === 'inbox' ? 'inbox' : 'requests'
 
-  // Get all messages
+  // Get all initial data
   const messages = await getMsg();
+  const requests = await getRqst();
+
   return {
     props: {
       page,
-      messages
+      messages,
+      requests
     }
   }
 }
