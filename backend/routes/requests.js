@@ -10,6 +10,16 @@ router.get("/", async (req, res) => {
     }
 })
 
+router.get("/:id", async (req, res) => {
+    try {
+        const { id } = req.params
+        const requestData = await RequestModel.findById(id);
+        res.status(200).json(requestData)
+    } catch (error) {
+        res.status(403).send('Error')
+    }
+})
+
 router.post("/", async (req, res) => {
     const content = req.body
     try {

@@ -1,41 +1,30 @@
 import _ from 'lodash'
 import Link from 'next/link'
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import { Navbar, Text, Button } from '@nextui-org/react'
 
 
 function Menu() {
 
     const items = [
-        { tag: "Inicio", href: '/' },
-        { tag: "Contacto", href: '/contacto' },
+        { tag: "Inicio", href: '/', active: true },
+        { tag: "Contacto", href: '/contacto', active: false },
     ]
 
-    const [activePage, setActivePage] = useState()
-
-    useEffect(() => {
-        setActivePage(getActivePage());
-    }, [])
-
-
     return (
-        <Navbar isCompact variant={"sticky"} css={{zIndex: '$max'}}>
+        <Navbar isCompact shouldHideOnScroll >
             <Navbar.Brand>
-                <Navbar.Toggle showIn="xs" />
-                <Text hideIn="xs">ACME</Text>
+                <Navbar.Toggle showIn="sm" />
+                <Text hideIn="sm">ACME</Text>
             </Navbar.Brand>
-            <Navbar.Content hideIn="sm" variant="underline" enableCursorHighlight>
-                {items.map(({ href, tag }, key) => (
-                    <Navbar.Link key={key} href={href} isActive={activePage === href ? true : false}>
-                        {tag}
-                    </Navbar.Link>
-
-                ))}
+            <Navbar.Content hideIn="sm" variant="underline" enableCursorHighlight >
+                <Navbar.Link href="/" isActive >Inicio</Navbar.Link>
+                <Navbar.Link href="/contacto">Contacto</Navbar.Link>
             </Navbar.Content>
             <Navbar.Collapse>
                 {items.map(({ href, tag }, key) => (
-                    <Navbar.CollapseItem key={key}>
-                        <Link href={href}>{tag}</Link>
+                    <Navbar.CollapseItem>
+                        <Link key={key} href={href}>{tag}</Link>
                     </Navbar.CollapseItem>
 
                 ))}
@@ -43,10 +32,6 @@ function Menu() {
             </Navbar.Collapse>
         </Navbar>
     )
-}
-
-function getActivePage(){
-    return window.location.pathname
 }
 
 export default Menu
