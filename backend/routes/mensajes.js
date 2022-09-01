@@ -25,7 +25,7 @@ router.delete("/:id", async (req, res) => {
     const { id } = req.params
     try {
         await MensajeModel.findByIdAndDelete(id);
-        res.status(200)
+        res.status(200).json('ok')
     } catch (error) {
         res.status(403).send('Can\'t delete');
     }

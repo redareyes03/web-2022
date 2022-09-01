@@ -3,6 +3,8 @@ import axios from 'axios'
 import _ from 'lodash'
 import React, { useState, useEffect } from 'react'
 import { v4 } from 'uuid'
+import { BsFillTelephoneFill } from 'react-icons/bs'
+import { MdAlternateEmail } from 'react-icons/md'
 
 function Requests({ requests }) {
     const [requestList, setRequestsList] = useState(requests)
@@ -14,20 +16,25 @@ function Requests({ requests }) {
     //         setList(data)
     //     })()
     // }, [])
+    console.log(requestList);
 
     const columns = [
-        { name: "Plan", uid: "Plan" },
-        { name: "Nombre", uid: "Nombre" },
-        { name: "Correo", uid: "Correo" },
-        { name: "Telefono", uid: "Telefono" },
-        { name: "Prefiere", uid: "Prefiere" },
-        { name: "Fecha", uid: "Fecha" },
+        { name: "Plan", uid: "plan" },
+        { name: "Nombre", uid: "nombre" },
+        { name: "Correo", uid: "correo" },
+        { name: "Telefono", uid: "telefono" },
+        { name: "Prefiere", uid: "contactar" },
+        { name: "Fecha", uid: "date" },
     ]
 
     const renderCell = (user, columnKey) => {
-        console.log(columnKey)
-        const cellValue = user[columnKey];
+        const cellVal = user[columnKey];
 
+        switch (columnKey) {
+            case 'contactar': return (cellVal === 'telefono' ? <BsFillTelephoneFill className="mx-auto flex fill-blue-400" /> : <MdAlternateEmail className="flex mx-auto fill-red-400" />)
+            case 'date': return <Text className="text-center">{new Date(cellVal).toLocaleDateString()}</Text>
+            default: return <Text className="text-center" >{cellVal}</Text>
+        }
     };
 
     return (
@@ -49,17 +56,17 @@ function Requests({ requests }) {
                 </div>
                 <Input type="search"></Input>
             </div>
-            <Table>
+            <Table selectionMode="multiple" color="error">
                 <Table.Header columns={columns}>
                     {(column) => (
-                        <Table.Column key={column.uid}>{column.name}</Table.Column>
+                        <Table.Column align="center" key={column.uid}>{column.name}</Table.Column>
                     )}
                 </Table.Header>
                 <Table.Body items={requestList}>
                     {(item) => (
-                        <Table.Row key={v4()}>
+                        <Table.Row key={v4()} >
                             {(columnKey) => (
-                                <Table.Cell>{renderCell(item, columnKey)}</Table.Cell>
+                                <Table.Cell css={{ p: 0 }}>{renderCell(item, columnKey)}</Table.Cell>
                             )}
                         </Table.Row>
                     )}

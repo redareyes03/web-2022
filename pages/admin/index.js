@@ -1,5 +1,10 @@
-import { Container, Text } from '@nextui-org/react'
+import { async } from '@firebase/util'
+import { Text } from '@nextui-org/react'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { useEffect, useState } from 'react'
+import Login from '../../src/components/admin_components/Login'
 import NavBar from '../../src/components/admin_components/NavBar'
+import { app } from '../../src/firebase'
 
 function Home() {
   return (
@@ -17,4 +22,22 @@ function Home() {
   )
 }
 
-export default Home
+export function AdminHandler() {
+
+  const [loginState, setUserState] = useState(null)
+
+  useState(() => {
+    const auth = getAuth(app);
+    onAuthStateChanged(auth, (user) => {
+      setUserState(user)
+    }, null)
+  }, [])
+
+  return (
+    true ? <Home /> : <Login />
+  )
+}
+
+
+
+export default AdminHandler

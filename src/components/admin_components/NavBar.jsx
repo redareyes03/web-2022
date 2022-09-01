@@ -4,6 +4,9 @@ import { FaPaperPlane, FaInbox } from 'react-icons/fa'
 import { BsCaretLeftFill } from 'react-icons/bs'
 import { CgLogOut } from 'react-icons/cg'
 
+import { getAuth, signOut } from 'firebase/auth'
+import { app } from '../../firebase'
+
 function NavBar() {
     return (
         <div className='fixed bg-gray-100/50 blur w-fit h-screen px-6 py-8 flex flex-col justify-between'>
@@ -33,7 +36,13 @@ function NavBar() {
 
             <div>
                 <Button as='a' href='/' className=" mb-4" color={'secondary'} shadow size="sm" icon={<BsCaretLeftFill />}>Landing Page</Button>
-                <Button className="w-full" color={'error'} shadow size="sm" icon={<CgLogOut />}>Logout</Button>
+                <Button
+                    className="w-full" color={'error'} shadow size="sm" icon={<CgLogOut />}
+                    onClick={() => {
+                        const auth = getAuth(app)
+                        signOut(auth);
+                    }}
+                >Logout</Button>
             </div>
         </div>
     )

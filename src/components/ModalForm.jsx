@@ -1,6 +1,6 @@
 import { Button, Checkbox, Grid, Input, Modal, Radio, Text } from '@nextui-org/react'
 import axios from 'axios'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import validate, { validateBool } from '../services/valForm'
 
 function ModalForm({ modalState, openHandler, titulo, planId }) {
@@ -16,13 +16,14 @@ function ModalForm({ modalState, openHandler, titulo, planId }) {
 
     const [status, setStatus] = useState(false);
     const [loading, setLoading] = useState(false);
+    useEffect(() => {
+        setDatos({ ...datos, plan: titulo, planId })
 
-    useState(() => {
-        setDatos({...datos, plan: titulo, planId})
-    })
+
+    }, [modalState])
 
     const resetFields = (datosObj) => {
-        const obj = {...datosObj}
+        const obj = { ...datosObj }
         for (const key in obj) {
             obj[key] = ''
         }
@@ -34,7 +35,7 @@ function ModalForm({ modalState, openHandler, titulo, planId }) {
             openHandler(false);
             setStatus(false);
             setDatos(resetFields(datos))
-            
+
         }}>
             <Modal.Header>
                 <div className='flex flex-col'>
