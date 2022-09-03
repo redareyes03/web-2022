@@ -1,8 +1,11 @@
-import { Text } from '@nextui-org/react'
-import axios from 'axios'
+import { Loading } from '@nextui-org/react'
+import { getAuth } from 'firebase/auth'
+import { useAuthState } from 'react-firebase-hooks/auth'
 import Inbox from '../../src/components/admin_components/Inbox'
+import Login from '../../src/components/admin_components/Login'
 import NavBar from '../../src/components/admin_components/NavBar'
 import Requests from '../../src/components/admin_components/Requests'
+import { app } from '../../src/firebase'
 import { getMsg } from '../../src/services/getMsg'
 import { getRqst } from '../../src/services/getRqst'
 
@@ -20,6 +23,23 @@ function Home({ page, messages, requests }) {
     </>
   )
 }
+
+function AdminHandler({ page, messages, requests }) {
+
+  const auth = getAuth(app)
+  const [user, loading] = useAuthState(auth)
+
+  return (
+    loading
+      ?
+      <div className='w-full h-screen flex items-center justify-center'>
+        <Loading  />
+      </div>
+      :
+      user ? <Home page={page} messages={messages} requests={requests} /> : <Login />
+  )
+}
+
 
 export function getStaticPaths() {
 
@@ -48,4 +68,4 @@ export async function getStaticProps(ctx) {
   }
 }
 
-export default Home
+export default AdminHandler

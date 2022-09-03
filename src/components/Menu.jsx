@@ -12,7 +12,7 @@ function Menu() {
     ]
 
     return (
-        <Navbar isCompact shouldHideOnScroll >
+        <Navbar isCompact variant={"sticky"} css={{zIndex: "$10"}}>
             <Navbar.Brand>
                 <Navbar.Toggle showIn="sm" />
                 <Text hideIn="sm">ACME</Text>
@@ -23,8 +23,8 @@ function Menu() {
             </Navbar.Content>
             <Navbar.Collapse>
                 {items.map(({ href, tag }, key) => (
-                    <Navbar.CollapseItem>
-                        <Link key={key} href={href}>{tag}</Link>
+                    <Navbar.CollapseItem key={key}>
+                        <Link  href={href}>{tag}</Link>
                     </Navbar.CollapseItem>
 
                 ))}

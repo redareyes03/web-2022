@@ -18,6 +18,11 @@
   position: relative
 }
 
+.sticky {
+  position: -webkit-sticky;
+  position: sticky
+}
+
 .inset-y-0 {
   top: 0px;
   bottom: 0px
